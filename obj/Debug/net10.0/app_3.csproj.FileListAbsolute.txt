@@ -1,0 +1,14 @@
+C:\Users\Рената\Desktop\app_3\bin\Debug\net10.0\app_3.exe
+C:\Users\Рената\Desktop\app_3\bin\Debug\net10.0\app_3.deps.json
+C:\Users\Рената\Desktop\app_3\bin\Debug\net10.0\app_3.runtimeconfig.json
+C:\Users\Рената\Desktop\app_3\bin\Debug\net10.0\app_3.dll
+C:\Users\Рената\Desktop\app_3\bin\Debug\net10.0\app_3.pdb
+C:\Users\Рената\Desktop\app_3\obj\Debug\net10.0\app_3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Рената\Desktop\app_3\obj\Debug\net10.0\app_3.AssemblyInfoInputs.cache
+C:\Users\Рената\Desktop\app_3\obj\Debug\net10.0\app_3.AssemblyInfo.cs
+C:\Users\Рената\Desktop\app_3\obj\Debug\net10.0\app_3.csproj.CoreCompileInputs.cache
+C:\Users\Рената\Desktop\app_3\obj\Debug\net10.0\app_3.dll
+C:\Users\Рената\Desktop\app_3\obj\Debug\net10.0\refint\app_3.dll
+C:\Users\Рената\Desktop\app_3\obj\Debug\net10.0\app_3.pdb
+C:\Users\Рената\Desktop\app_3\obj\Debug\net10.0\app_3.genruntimeconfig.cache
+C:\Users\Рената\Desktop\app_3\obj\Debug\net10.0\ref\app_3.dll
