@@ -29,10 +29,6 @@ string[] search_words = ["that", "you", "romeo", "vengeance", "mirror"];
 //слово для поиска контекста (задание 3)
 string target_word = "romeo";
 
-//пул потоков сразу создаёт нужное число потоков, иначе он добавляет их медленно
-//и время для большого числа потоков получается завышенным
-ThreadPool.SetMinThreads(nums.Max(), nums.Max());
-
 
 //меню
 while (true)
