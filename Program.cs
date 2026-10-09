@@ -8,8 +8,8 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 
-//Названия файлов нужно заменить при запуске кода на другом пк!!!
-//(сейчас папка с данными ищется автоматически рядом с проектом, путь можно передать первым аргументом)
+
+//папка с данными ищется автоматически рядом с проектом
 string data_root = args.Length > 0 ? args[0] : FindDataRoot();
 string[] folders =
 {
@@ -65,8 +65,8 @@ while (true)
 }
 
 
-//==================== ЗАДАНИЕ 1 ====================
-//Подсчёт частоты слов: последовательно и параллельно (MapReduce)
+
+//Задание 1 Подсчёт частоты слов: последовательно и параллельно (MapReduce)
 
 static void RunTask1(string[] folders, int[] nums)
 {
@@ -177,7 +177,7 @@ static ConcurrentDictionary<string, int> CountParallelMapReduce(List<string> fil
             }
             return localCounts;
         },
-        //Reduce: слияние локальных словарей в общий
+        
         (localCounts) =>
         {
             foreach (var pair in localCounts)
@@ -189,15 +189,15 @@ static ConcurrentDictionary<string, int> CountParallelMapReduce(List<string> fil
 }
 
 
-//==================== ЗАДАНИЕ 2 ====================
-//Поиск предложений с заданными словами: LINQ и PLINQ
+
+//Задание 2 Поиск предложений с заданными словами: LINQ и PLINQ
 
 static void RunTask2(string[] folders, int[] nums_plinq, string[] search_words)
 {
     Console.WriteLine();
     Console.WriteLine("ЗАДАНИЕ 2. ПОИСК ПРЕДЛОЖЕНИЙ СО СЛОВАМИ: " + string.Join(", ", search_words));
 
-    //прогрев на маленькой папке
+    
     var warm_files = Directory.EnumerateFiles(folders[0], "*.txt").ToList();
     FindSentencesLinq(warm_files, search_words);
     FindSentencesPlinq(warm_files, search_words, 2);
@@ -208,7 +208,7 @@ static void RunTask2(string[] folders, int[] nums_plinq, string[] search_words)
         Console.WriteLine();
         Console.WriteLine($"Папка: {folder} (файлов: {files.Count})");
 
-        //холостой прогон
+        
         FindSentencesLinq(files, search_words);
 
         //последовательная версия (LINQ)
@@ -229,7 +229,7 @@ static void RunTask2(string[] folders, int[] nums_plinq, string[] search_words)
             Console.WriteLine($"PLINQ, потоков: {item}, время: {sw_parallel.ElapsedMilliseconds} мс, совпадает с LINQ: {total_plinq == total_linq}");
         }
 
-        //вывод результата: число предложений и до 3 примеров на слово
+        
         Console.WriteLine();
         foreach (var word in search_words)
         {
@@ -330,15 +330,15 @@ static Dictionary<string, List<string>> FindSentencesPlinq(List<string> files, s
 }
 
 
-//==================== ЗАДАНИЕ 3 ====================
-//Вывод контекста заданного слова: LINQ и PLINQ
+
+//Задание 3 Вывод контекста заданного слова: LINQ и PLINQ
 
 static void RunTask3(string[] folders, int[] nums_plinq, string target_word)
 {
     Console.WriteLine();
     Console.WriteLine($"ЗАДАНИЕ 3. КОНТЕКСТ СЛОВА: {target_word}");
 
-    //прогрев на маленькой папке
+    
     var warm_files = Directory.EnumerateFiles(folders[0], "*.txt").ToList();
     CountContextLinq(warm_files, target_word);
     CountContextPlinq(warm_files, target_word, 2);
@@ -349,7 +349,7 @@ static void RunTask3(string[] folders, int[] nums_plinq, string target_word)
         Console.WriteLine();
         Console.WriteLine($"Папка: {folder} (файлов: {files.Count})");
 
-        //холостой прогон
+        
         CountContextLinq(files, target_word);
 
         //последовательная версия (LINQ)
@@ -395,7 +395,7 @@ static void RunTask3(string[] folders, int[] nums_plinq, string target_word)
 }
 
 
-//Функция для поиска соседних слов в файле (соседи ищутся в пределах одной строки)
+//Функция для поиска соседних слов в файле 
 static IEnumerable<string> ReadContextWords(string path, string target_word)
 {
     foreach (var line in File.ReadLines(path))
@@ -445,7 +445,6 @@ static Dictionary<string, int> CountContextPlinq(List<string> files, string targ
 }
 
 
-//==================== ОБЩАЯ ФУНКЦИЯ ====================
 
 //Функция для очистки текста
 static IEnumerable<string> Pull(string line)
