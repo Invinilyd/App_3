@@ -8,13 +8,14 @@ using System.Diagnostics;
 using static System.Linq.ParallelEnumerable;
 
 
-//Названия файлов нужно заменить при запуске кода на другом пк!!!
+//Папка с данными ищется автоматически (можно передать путь первым аргументом)
+string dataRoot = args.Length > 0 ? args[0] : FindDataRoot();
 string[] folders =
 {
-    @"C:\Users\Рената\Desktop\app_3\new_data_10",
-    @"C:\Users\Рената\Desktop\app_3\new_data_50",
-    @"C:\Users\Рената\Desktop\app_3\new_data_100",
-    @"C:\Users\Рената\Desktop\app_3\new_data_500"
+    Path.Combine(dataRoot, "new_data_10"),
+    Path.Combine(dataRoot, "new_data_50"),
+    Path.Combine(dataRoot, "new_data_100"),
+    Path.Combine(dataRoot, "new_data_500")
 };
 int [] nums = [2, 4, 8, 12, 16, 20];
 
@@ -132,6 +133,23 @@ static ConcurrentDictionary<string,int> CountParallelMapReduce(List<string> file
             }
         });
     return global_counts_words;
+}
+
+
+//Функция для поиска папки с данными: поднимается вверх от папки с exe,
+//пока не найдёт папку, в которой лежит new_data_10
+static string FindDataRoot()
+{
+    var dir = new DirectoryInfo(AppContext.BaseDirectory);
+    while (dir != null)
+    {
+        if (Directory.Exists(Path.Combine(dir.FullName, "new_data_10")))
+        {
+            return dir.FullName;
+        }
+        dir = dir.Parent;
+    }
+    return Directory.GetCurrentDirectory();
 }
 
 
