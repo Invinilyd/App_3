@@ -241,9 +241,12 @@ static void RunTask2(string[] folders, int[] nums_plinq, string[] search_words)
 
             var found = sentences_by_word[word];
             Console.WriteLine($"{word}: найдено предложений: {found.Count}");
-            foreach (var sentence in found.Take(3))
+
+            //до 3 примеров: сначала короткие предложения, длинные обрезаются
+            var examples = found.OrderBy(sentence => sentence.Length > 150).Take(3);
+            foreach (var sentence in examples)
             {
-                Console.WriteLine($"   - {sentence}");
+                Console.WriteLine($"   - {ShortSentence(sentence, 150)}");
             }
         }
     }
@@ -275,6 +278,19 @@ static IEnumerable<string> ReadSentences(string path)
     {
         yield return buffer.Trim();
     }
+}
+
+
+//Функция для сокращения предложения при выводе
+static string ShortSentence(string sentence, int max_length)
+{
+    //лишние пробелы (после склейки строк) заменяются одним
+    var text = Regex.Replace(sentence, @"\s+", " ");
+    if (text.Length <= max_length)
+    {
+        return text;
+    }
+    return text.Substring(0, max_length) + "...";
 }
 
 
